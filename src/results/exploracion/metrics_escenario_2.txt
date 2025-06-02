@@ -1,0 +1,4 @@
+Tiempo de ejecución: 307.15 segundos
+Porcentaje de exploración: 111.35%
+Objetivos inválidos: 7
+Puntos no alcanzados: [(126, 137), (230, 177), (226, 180), (212, 119), (156, 83), (249, 160), (142, 65)]

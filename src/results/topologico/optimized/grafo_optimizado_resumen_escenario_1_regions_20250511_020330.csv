@@ -1,0 +1,4 @@
+region_id,num_nodes,avg_degree,num_endpoints,num_junctions,num_intermediate,associated_doors,centroid
+2,21,32.0,0,21,0,D1,"(208, 161)"
+4,17,31.41176470588235,0,17,0,"D0, D1, D2","(253, 163)"
+3,29,30.275862068965516,0,29,0,"D0, D2","(304, 165)"

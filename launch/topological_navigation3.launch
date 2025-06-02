@@ -1,0 +1,25 @@
+<launch>
+    <!-- Lanzar simulación Gazebo -->
+    <include file="$(find robots_moviles)/launch/turtlebot3_escenario3.launch"/>
+    
+    <!-- Esperar 5 segundos para que Gazebo se inicie -->
+    <arg name="delay" default="5"/>
+    <node pkg="rosservice" type="rosservice" name="pause_gazebo" args="call --wait /gazebo/pause_physics '{}'" launch-prefix="bash -c 'sleep $(arg delay); $0 $@'"/>
+
+    <!-- Lanzar navegación -->
+    <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+        <arg name="map_file" value="$(find robots_moviles)/maps/escenario_3.yaml"/>
+    </include>
+
+    <!-- Esperar 10 segundos para que la navegación se inicie -->
+    <node pkg="rosservice" type="rosservice" name="unpause_gazebo" args="call --wait /gazebo/unpause_physics '{}'" launch-prefix="bash -c 'sleep $(arg delay); $0 $@'"/>
+    
+    <!-- Nodo de navegación topológica -->
+    <node pkg="robots_moviles" type="topological_navigation.py" name="topological_navigation" output="screen" launch-prefix="bash -c 'sleep 15; $0 $@'">
+        <param name="resolution" value="0.05"/>
+        <param name="origin_x" value="1.0"/>
+        <param name="origin_y" value="-6.0"/>
+        <param name="graph_file" value="$(find robots_moviles)/src/results/topologico/optimized/grafo_optimizado_3.json.gz"/>
+        <param name="max_node_distance" value="0.2"/>
+    </node>
+</launch>
